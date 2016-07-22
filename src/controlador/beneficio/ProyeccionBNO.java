@@ -123,7 +123,7 @@ public class ProyeccionBNO {
                 wr.append((Integer.parseInt(Anio) + columna) + "E\t");
             }
 
-            wr.append("\n" + Conceptos.get(0));
+            wr.append("\n" + Conceptos.get(0) );
             wr.append(Tabulacion);
             for (int columna = 0; columna < NroAniosProy; columna++) {
                 wr.append((_matrixBeneficio.get(indice).getPorcCostos()).toString().replace(".", ",") + "%\t");
