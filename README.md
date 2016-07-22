@@ -1,0 +1,1 @@
+# CapacidadPago-Snapshot-1.1
