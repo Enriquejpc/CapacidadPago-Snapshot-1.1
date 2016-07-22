@@ -112,6 +112,11 @@ public class Ventas extends javax.swing.JFrame {
 
         jButtonCalcularVentasConservador.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonCalcularVentasConservador.setText("Calcular Ventas Conservador");
+        jButtonCalcularVentasConservador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularVentasConservadorActionPerformed(evt);
+            }
+        });
 
         jButtonCalcularVentasModerado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonCalcularVentasModerado.setText("Calcular Ventas Moderado");
@@ -568,6 +573,10 @@ public class Ventas extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButtonBeneficioActionPerformed
+
+    private void jButtonCalcularVentasConservadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularVentasConservadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCalcularVentasConservadorActionPerformed
 
     /**
      * @param args the command line arguments
