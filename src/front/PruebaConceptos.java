@@ -15,10 +15,7 @@ public class PruebaConceptos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        /* ProyeccionCapacidadPago proyeccionCapacidadPago = new ProyeccionCapacidadPago();
-        proyeccionCapacidadPago.setLocationRelativeTo(null);
-        proyeccionCapacidadPago.setVisible(true);*/
+       
         SolicitudArchivo solicitudArchivo = new SolicitudArchivo();
         solicitudArchivo.setLocationRelativeTo(null);
         solicitudArchivo.setVisible(true);

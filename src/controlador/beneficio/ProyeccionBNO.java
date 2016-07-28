@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,8 +49,7 @@ public class ProyeccionBNO {
          */
         if (_IndicEscenario == 1) {
             Collections.sort(_matrixBeneficio);
-           
-            _exito = GenerarArchivoSalidaConservador(_matrixBeneficio, indice, anio[2]);
+           _exito = GenerarArchivoSalidaConservador(_matrixBeneficio, indice, anio[2]);
         }
         /**
          * Escenario 2 - Moderado
@@ -266,7 +264,6 @@ public class ProyeccionBNO {
 
             //3)Calculamos el promedio ponderado
             Promedioponderado = TotalPorcentaje - _BNOProy;//TotalPorcentaje.subtract(_BNOProy);
-
             porcGastoProy = ((Promedioponderado * Distribucionponderada) / TotalPorcentaje);//(Promedioponderado.multiply(Distribucionponderada));//.divide(TotalPorcentaje,2,RoundingMode.UNNECESSARY);
             porcGastoProy = round(porcGastoProy, 2);
         } else {//BNOProy != BNOPermitido
@@ -303,7 +300,7 @@ public class ProyeccionBNO {
 
     public double CostosproyModerado(ArrayList<BeneficiosBean> _matrixBeneficio, boolean _indicCorte, double _BNOProy, double _BNOPermitido) {
         int _Criterio = CompareDouble(_BNOProy, _BNOPermitido);
-       
+        System.out.println("Criterio"+_Criterio);
         double TotalPorcentaje = 100; //new BigDecimal("100");
         double porcCostoCorte;// = new BigDecimal(BigInteger.ONE);
         double BNOCorte;//= new BigDecimal(BigInteger.ONE);
@@ -418,12 +415,7 @@ public class ProyeccionBNO {
 
         return null;
     }
-    public BigDecimal FormatearDouble(double _Valor) {
-        String resultado = "";
-        resultado = new DecimalFormat("#.##").format(_Valor);
-
-        return new BigDecimal(resultado);
-    }
+  
    
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

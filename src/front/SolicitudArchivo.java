@@ -48,14 +48,14 @@ public class SolicitudArchivo extends javax.swing.JFrame {
         jLabelVigenciaTasa = new javax.swing.JLabel();
         jLabelDestino = new javax.swing.JLabel();
         jLabelAmortizacion = new javax.swing.JLabel();
-        destino = new javax.swing.JComboBox<>();
+        destino = new javax.swing.JComboBox<String>();
         jLabelPlazoMeses = new javax.swing.JLabel();
         jLabelCartera = new javax.swing.JLabel();
-        cartera = new javax.swing.JComboBox<>();
+        cartera = new javax.swing.JComboBox<String>();
         jLabelTasa = new javax.swing.JLabel();
         jLabelComision = new javax.swing.JLabel();
         jLabelEscenario = new javax.swing.JLabel();
-        escenario = new javax.swing.JComboBox<>();
+        escenario = new javax.swing.JComboBox<String>();
         jButtonVentas = new javax.swing.JButton();
         jButtonDeudas = new javax.swing.JButton();
         jButtonBeneficio = new javax.swing.JButton();
@@ -67,7 +67,7 @@ public class SolicitudArchivo extends javax.swing.JFrame {
         plazoMeses = new javax.swing.JTextField();
         tasa = new javax.swing.JTextField();
         comision = new javax.swing.JTextField();
-        amort = new javax.swing.JComboBox<>();
+        amort = new javax.swing.JComboBox<String>();
         fechaEstimadaLiq = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,58 +80,87 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         jLabelDatosSolicitud.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelDatosSolicitud.setText("Datos de Solictud");
+        getContentPane().add(jLabelDatosSolicitud);
+        jLabelDatosSolicitud.setBounds(31, 11, 196, 29);
 
         jLabelMontoSolicitado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelMontoSolicitado.setText("Monto Solicitado");
+        getContentPane().add(jLabelMontoSolicitado);
+        jLabelMontoSolicitado.setBounds(52, 82, 100, 17);
 
         jLabelFechaEstiLiqu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelFechaEstiLiqu.setText("Fecha Estimada de Liquidación");
+        getContentPane().add(jLabelFechaEstiLiqu);
+        jLabelFechaEstiLiqu.setBounds(52, 130, 185, 17);
 
         jLabelVigenciaTasa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelVigenciaTasa.setText("Vigencia de la Tasa");
+        getContentPane().add(jLabelVigenciaTasa);
+        jLabelVigenciaTasa.setBounds(52, 171, 113, 17);
 
         jLabelDestino.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelDestino.setText("Destino");
+        getContentPane().add(jLabelDestino);
+        jLabelDestino.setBounds(52, 262, 46, 17);
 
         jLabelAmortizacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelAmortizacion.setText("Amortización");
+        getContentPane().add(jLabelAmortizacion);
+        jLabelAmortizacion.setBounds(52, 220, 78, 17);
 
         destino.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        destino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo Fijo", "Capital Trabajo" }));
+        destino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Activo Fijo", "Capital Trabajo" }));
         destino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 destinoActionPerformed(evt);
             }
         });
+        getContentPane().add(destino);
+        destino.setBounds(255, 262, 142, 23);
 
         jLabelPlazoMeses.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPlazoMeses.setText("Plazo Meses");
+        getContentPane().add(jLabelPlazoMeses);
+        jLabelPlazoMeses.setBounds(447, 82, 71, 17);
 
         jLabelCartera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCartera.setText("Cartera");
+        getContentPane().add(jLabelCartera);
+        jLabelCartera.setBounds(447, 132, 45, 17);
 
         cartera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cartera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Comercial", "Manufactura Pymi", "Manufactura" }));
+        cartera.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Comercial", "Manufactura Pymi", "Manufactura" }));
         cartera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carteraActionPerformed(evt);
             }
         });
+        getContentPane().add(cartera);
+        cartera.setBounds(528, 130, 142, 23);
 
         jLabelTasa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTasa.setText("Tasa");
+        getContentPane().add(jLabelTasa);
+        jLabelTasa.setBounds(447, 171, 28, 17);
 
         jLabelComision.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelComision.setText("Comisión");
+        getContentPane().add(jLabelComision);
+        jLabelComision.setBounds(447, 220, 55, 17);
 
         jLabelEscenario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelEscenario.setText("Escenario");
+        getContentPane().add(jLabelEscenario);
+        jLabelEscenario.setBounds(447, 264, 58, 17);
 
         escenario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        escenario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Conservador", "Moderado", "Parametizable" }));
+        escenario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Conservador", "Moderado", "Parametizable" }));
+        getContentPane().add(escenario);
+        escenario.setBounds(528, 262, 140, 23);
 
         jButtonVentas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonVentas.setText("Ventas");
@@ -140,6 +169,8 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 jButtonVentasActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonVentas);
+        jButtonVentas.setBounds(707, 132, 99, 25);
 
         jButtonDeudas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonDeudas.setText("Deudas");
@@ -153,6 +184,8 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 jButtonDeudasActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonDeudas);
+        jButtonDeudas.setBounds(707, 89, 99, 25);
 
         jButtonBeneficio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonBeneficio.setText("Beneficio");
@@ -161,9 +194,18 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 jButtonBeneficioActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonBeneficio);
+        jButtonBeneficio.setBounds(707, 175, 99, 25);
 
         jButtonParametros.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonParametros.setText("Parametros");
+        jButtonParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonParametrosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonParametros);
+        jButtonParametros.setBounds(707, 218, 99, 25);
 
         jButtonSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonSalir.setText("Salir");
@@ -172,6 +214,8 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 jButtonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonSalir);
+        jButtonSalir.setBounds(707, 264, 99, 25);
 
         jButtonCarga.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonCarga.setText("Cargar");
@@ -185,142 +229,32 @@ public class SolicitudArchivo extends javax.swing.JFrame {
                 jButtonCargaActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonCarga);
+        jButtonCarga.setBounds(255, 27, 99, 25);
+        getContentPane().add(montoSolicitado);
+        montoSolicitado.setBounds(255, 82, 142, 20);
+        getContentPane().add(vigenciaTasa);
+        vigenciaTasa.setBounds(255, 171, 142, 20);
+        getContentPane().add(plazoMeses);
+        plazoMeses.setBounds(528, 82, 142, 20);
+        getContentPane().add(tasa);
+        tasa.setBounds(528, 175, 142, 20);
+        getContentPane().add(comision);
+        comision.setBounds(528, 221, 140, 20);
 
         amort.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        amort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
+        amort.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
         amort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 amortActionPerformed(evt);
             }
         });
+        getContentPane().add(amort);
+        amort.setBounds(255, 221, 142, 23);
+        getContentPane().add(fechaEstimadaLiq);
+        fechaEstimadaLiq.setBounds(255, 130, 142, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelFechaEstiLiqu)
-                            .addComponent(jLabelMontoSolicitado)
-                            .addComponent(jLabelVigenciaTasa)
-                            .addComponent(jLabelAmortizacion)
-                            .addComponent(jLabelDestino)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabelDatosSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(montoSolicitado)
-                            .addComponent(destino, 0, 142, Short.MAX_VALUE)
-                            .addComponent(amort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vigenciaTasa)
-                            .addComponent(fechaEstimadaLiq))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPlazoMeses)
-                            .addComponent(jLabelCartera)
-                            .addComponent(jLabelTasa)
-                            .addComponent(jLabelComision)
-                            .addComponent(jLabelEscenario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comision)
-                                    .addComponent(escenario, 0, 140, Short.MAX_VALUE))
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cartera, javax.swing.GroupLayout.Alignment.LEADING, 0, 142, Short.MAX_VALUE)
-                                    .addComponent(plazoMeses, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tasa))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonDeudas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonBeneficio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(20, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabelDatosSolicitud))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jButtonCarga)))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelMontoSolicitado)
-                                .addComponent(montoSolicitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelPlazoMeses)
-                                .addComponent(plazoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelFechaEstiLiqu)
-                                .addComponent(fechaEstimadaLiq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelCartera)
-                                .addComponent(cartera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelVigenciaTasa)
-                            .addComponent(jLabelTasa)
-                            .addComponent(vigenciaTasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelAmortizacion)
-                                    .addComponent(jLabelComision))
-                                .addGap(25, 25, 25))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(amort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDestino)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelEscenario)
-                                .addComponent(escenario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jButtonDeudas)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonVentas)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonBeneficio, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonParametros))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSalir)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        pack();
+        setBounds(0, 0, 834, 342);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDeudasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeudasActionPerformed
@@ -544,6 +478,52 @@ public class SolicitudArchivo extends javax.swing.JFrame {
     private void destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_destinoActionPerformed
+
+    private void jButtonParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParametrosActionPerformed
+          /* if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
+            JOptionPane.showMessageDialog(null, "El monto no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isNumerico(montoSolicitado.getText())) {
+            JOptionPane.showMessageDialog(null, "El monto debe ser numerico");
+
+        } else if (FuncionesUtiles.isVacio(fechaEstimadaLiq.getText())) {
+            JOptionPane.showMessageDialog(null, "La fecha no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isFormatoFecha(fechaEstimadaLiq.getText())) {
+            JOptionPane.showMessageDialog(null, "La fecha debe contener el siguiente formato ##/##/####");
+
+        } else if (FuncionesUtiles.isVacio(vigenciaTasa.getText())) {
+            JOptionPane.showMessageDialog(null, "La Vigencia de la tasa no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isNumerico(vigenciaTasa.getText())) {
+            JOptionPane.showMessageDialog(null, "La vigencia de la tasa debe ser númerico");
+
+        } else if (FuncionesUtiles.isVacio(plazoMeses.getText())) {
+            JOptionPane.showMessageDialog(null, "El plazo no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isNumerico(plazoMeses.getText())) {
+            JOptionPane.showMessageDialog(null, "El plazo debe ser númerico");
+
+        } else if (FuncionesUtiles.isVacio(tasa.getText())) {
+            JOptionPane.showMessageDialog(null, "La tasa no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isNumerico(tasa.getText())) {
+            JOptionPane.showMessageDialog(null, "La tasa debe ser númerico");
+
+        } else if (FuncionesUtiles.isVacio(comision.getText())) {
+            JOptionPane.showMessageDialog(null, "La comisión no puede ser vacia");
+
+        } else if (!FuncionesUtiles.isNumerico(comision.getText())) {
+            JOptionPane.showMessageDialog(null, "La comisión debe ser númerico");
+
+        } else {*/
+            Parametros ScrParametros= new Parametros();
+            ScrParametros.setLocationRelativeTo(null);
+            ScrParametros.setVisible(true);
+            this.setVisible(false);
+       /* }*/
+       
+    }//GEN-LAST:event_jButtonParametrosActionPerformed
 
     /**
      * @param args the command line arguments

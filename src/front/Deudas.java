@@ -83,9 +83,9 @@ public class Deudas extends javax.swing.JFrame {
         tasaMercantil = new javax.swing.JTextField();
         tasaBanesco = new javax.swing.JTextField();
         tasaProvincial = new javax.swing.JTextField();
-        amortMercantil = new javax.swing.JComboBox<>();
-        amortBanesco = new javax.swing.JComboBox<>();
-        amortProvincial = new javax.swing.JComboBox<>();
+        amortMercantil = new javax.swing.JComboBox<String>();
+        amortBanesco = new javax.swing.JComboBox<String>();
+        amortProvincial = new javax.swing.JComboBox<String>();
         jButtonGenerarTablaAmort = new javax.swing.JButton();
         jButtonVerTablasResumen = new javax.swing.JButton();
         jButtonSolicitud = new javax.swing.JButton();
@@ -195,7 +195,7 @@ public class Deudas extends javax.swing.JFrame {
         tasaProvincial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         amortMercantil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        amortMercantil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
+        amortMercantil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
         amortMercantil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 amortMercantilActionPerformed(evt);
@@ -203,7 +203,7 @@ public class Deudas extends javax.swing.JFrame {
         });
 
         amortBanesco.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        amortBanesco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
+        amortBanesco.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
         amortBanesco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 amortBanescoActionPerformed(evt);
@@ -211,7 +211,7 @@ public class Deudas extends javax.swing.JFrame {
         });
 
         amortProvincial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        amortProvincial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
+        amortProvincial.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral" }));
 
         jButtonGenerarTablaAmort.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonGenerarTablaAmort.setText("Generar Tabla de Amortización");
@@ -223,6 +223,11 @@ public class Deudas extends javax.swing.JFrame {
 
         jButtonVerTablasResumen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonVerTablasResumen.setText("Ver Tablas Resumen");
+        jButtonVerTablasResumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerTablasResumenActionPerformed(evt);
+            }
+        });
 
         jButtonSolicitud.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonSolicitud.setText("Solicitud");
@@ -919,6 +924,7 @@ public class Deudas extends javax.swing.JFrame {
                 FuncionesUtiles.escribirArchivo("SolicitudArchivo.txt", _amortizacionSolicitud, "Solicitud", solicituBean.get(i).getMontoSolicitado().toString(), solicituBean.get(i).getFechaEstLiq(), solicituBean.get(i).getPlazoMeses().toString());
                 jLabelMensaje.setText("Se generaron los Archivos de manera exitosa");
             }
+           
 
         } else {
             jLabelMensaje.setText("Cargar los valores en Datos Solicitud para "
@@ -930,6 +936,10 @@ public class Deudas extends javax.swing.JFrame {
     private void saldoMercantilDafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldoMercantilDafActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saldoMercantilDafActionPerformed
+
+    private void jButtonVerTablasResumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerTablasResumenActionPerformed
+   
+    }//GEN-LAST:event_jButtonVerTablasResumenActionPerformed
 
     /**
      * @param args the command line arguments

@@ -59,7 +59,8 @@ public final class Amortizacion {
         this.periodicidad = new BigDecimal(String.valueOf(amortizacion));
         this.plazo = new BigDecimal(plazo);
         this.mesesAños = new BigDecimal("12");
-        this.montoSolicitado = new BigDecimal(montoSolicitado);
+        this.montoSolicitado = new BigDecimal(montoSolicitado.replaceAll(",", "."));
+        
         this.numeroTotalCuotas = this.plazo.add(new BigDecimal("1"));
         this.cantidadAñoProyeccion = this.plazo.divide(mesesAños).add(new BigDecimal("1"));//año proyección       
         this.cuotasCobroCapital = this.plazo.divide(periodicidad);//cuotasEfectivas
@@ -142,6 +143,7 @@ public final class Amortizacion {
             cuotaActual = cuotaActual + 1;
             amortizacion.add(amortizacionBean);
         }
+            
         return amortizacion;
     }
 
@@ -252,6 +254,8 @@ public final class Amortizacion {
 
             }
         }
+        System.out.println("Hola Mundo");
+   
         return amortizacion;
     }
 
@@ -262,13 +266,16 @@ public final class Amortizacion {
     public BigDecimal pCC() {
         BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
         BigDecimal porAño;
+        //int a = amortizacionBean.getDestino() ;
         if (amortizacionBean.getDestino() == 2) {
+           // System.out.println("a");
             return porcionCorrienteCorregida;
         } else {
             for (int i = 1; i <= this.cantidadAñoProyeccion.intValue(); i++) {
                 if (i == 1) {
                     porAño = new BigDecimal(String.valueOf(i));
                     porcionCorrienteCorregida = this.sumCapital.divide(porAño);
+                    //System.out.println("PCC"+porcionCorrienteCorregida);
                 }
             }
             return porcionCorrienteCorregida;
@@ -323,13 +330,14 @@ public final class Amortizacion {
         if (this.cantidadAñoProyeccion.intValue() == 0) {
             if (amortizacionBean.getDestino() == 2) {
                 interesesAcumulados = amortizacionBean.getCapital().multiply(this.comisionFlat);
+                System.out.println("jsfsdfhjksd");
             } else {
                 interesesAcumulados = amortizacionBean.getInteres().add(amortizacionBean.getCapital()).multiply(this.comisionFlat);
             }
         } else {
             interesesAcumulados = amortizacionBean.getInteres().divide(this.cantidadAñoProyeccion);
         }
-
+        System.out.println("Interese"+interesesAcumulados);
         return interesesAcumulados;
     }
 
@@ -337,31 +345,31 @@ public final class Amortizacion {
      *
      * @return un BigDecima de porcion Corriente Corregida
      */
-    public BigDecimal pCCAF() {
+    /*public BigDecimal pCCAF() {
         BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
         if (this.cantidadAñoProyeccion.intValue() == 1) {
             porcionCorrienteCorregida = amortizacionBean.getCapital();
         }
         return porcionCorrienteCorregida;
-    }
+    }*/
 
     /**
      *
      * @return un BigDecimal de porcion Corriente Corregida
      */
-    public BigDecimal pCDLPAF() {
+    /*public BigDecimal pCDLPAF() {
         BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
         for (int i = 0; i < this.cantidadAñoProyeccion.intValue(); i++) {
             porcionCorrienteCorregida = amortizacionBean.getInteres().add(amortizacionBean.getInteres()).divide(amortizacionBean.getCantidadAñoProyeccion());
         }
         return porcionCorrienteCorregida = amortizacionBean.getInteres();
-    }
+    }*/
 
     /**
      *
      * @return un BigDecimal de deuda Largo Plazo
      */
-    public BigDecimal dLPAF() {
+   /* public BigDecimal dLPAF() {
         BigDecimal deudaLargoPlazo = new BigDecimal("0");
 
         if (this.cantidadAñoProyeccion.intValue() == 0) {
@@ -371,16 +379,16 @@ public final class Amortizacion {
         }
 
         return deudaLargoPlazo;
-    }
+    }*/
 
     /**
      *
      * @return un BigDecimal de intereses Acumulados
      */
-    public BigDecimal iAAF() {
+    /*public BigDecimal iAAF() {
         BigDecimal interesesAcumulados = new BigDecimal("0");
 
         return interesesAcumulados;
-    }
+    }*/
 
 }

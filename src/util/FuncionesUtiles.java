@@ -19,8 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 import models.AmortizacionBean;
 
 /**
@@ -28,6 +27,9 @@ import models.AmortizacionBean;
  * @author B586854
  */
 public class FuncionesUtiles {
+
+    public FuncionesUtiles() {
+    }
 
     /**
      * Método que nos permite validar si la cadena contiene puro número
@@ -272,4 +274,6 @@ public class FuncionesUtiles {
         }
         return fecha;
     }
+    
+ 
 }

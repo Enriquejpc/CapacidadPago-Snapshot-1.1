@@ -5,6 +5,7 @@
  */
 package front;
 
+import controlador.ventas.ProyeccionVentas;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.VentasBean;
 import util.FuncionesUtiles;
@@ -26,6 +28,7 @@ public class Ventas extends javax.swing.JFrame {
     /**
      * Creates new form Ventas
      */
+    static ArrayList<VentasBean> _matrixVentas = null;
     public Ventas() {
         initComponents();
     }
@@ -120,6 +123,11 @@ public class Ventas extends javax.swing.JFrame {
 
         jButtonCalcularVentasModerado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonCalcularVentasModerado.setText("Calcular Ventas Moderado");
+        jButtonCalcularVentasModerado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularVentasModeradoActionPerformed(evt);
+            }
+        });
 
         jButtonSolicitud.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonSolicitud.setText("Solicitud");
@@ -266,7 +274,7 @@ public class Ventas extends javax.swing.JFrame {
 
         String linea;
         String[] datosVentas;
-        ArrayList<VentasBean> _matrixVentas = null;
+        
         BufferedReader bf = null;
         try {
             bf = new BufferedReader(new FileReader("C:\\PConceptoCapacidad\\archivos\\ArchivoCargaVentas.txt"));
@@ -575,8 +583,26 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBeneficioActionPerformed
 
     private void jButtonCalcularVentasConservadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularVentasConservadorActionPerformed
-        // TODO add your handling code here:
+        boolean _exito = false;
+        ProyeccionVentas _accesoCtrlVentas = new ProyeccionVentas();
+        Parametros _accesoParametros = new Parametros();
+        _exito =_accesoCtrlVentas.ProyectarVentas(_matrixVentas, 1, Integer.parseInt(_accesoParametros._VentasMaxPerm.getText()));
+         if(_exito == true)
+           JOptionPane.showMessageDialog(null, "Archivo Generado Exitosamente");
+       else
+           JOptionPane.showMessageDialog(new JFrame(), "Error generando el archivo", "Dialog", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButtonCalcularVentasConservadorActionPerformed
+
+    private void jButtonCalcularVentasModeradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularVentasModeradoActionPerformed
+         boolean _exito = false;
+        ProyeccionVentas _accesoCtrlVentas = new ProyeccionVentas();
+        Parametros _accesoParametros = new Parametros();
+        _exito =_accesoCtrlVentas.ProyectarVentas(_matrixVentas, 2, Integer.parseInt(_accesoParametros._VentasMaxMod.getText()));
+         if(_exito == true)
+           JOptionPane.showMessageDialog(null, "Archivo Generado Exitosamente");
+       else
+           JOptionPane.showMessageDialog(new JFrame(), "Error generando el archivo", "Dialog", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_jButtonCalcularVentasModeradoActionPerformed
 
     /**
      * @param args the command line arguments
