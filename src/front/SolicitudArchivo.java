@@ -571,7 +571,7 @@ public class SolicitudArchivo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> amort;
     private javax.swing.JComboBox<String> cartera;
     private javax.swing.JTextField comision;
-    private javax.swing.JComboBox<String> destino;
+    public static javax.swing.JComboBox<String> destino;
     private javax.swing.JComboBox<String> escenario;
     private javax.swing.JTextField fechaEstimadaLiq;
     private javax.swing.JButton jButtonBeneficio;

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import controlador.Amortizacion;
+import controlador.amortizaciones.Amortizacion;
 import models.DeudasBean;
 import models.SolicitudBean;
 import util.FuncionesUtiles;
@@ -909,7 +909,7 @@ public class Deudas extends javax.swing.JFrame {
         ArrayList<Amortizacion> _amortizacionProvincial = new ArrayList<Amortizacion>();
         ArrayList<Amortizacion> _amortizacionSolicitud = new ArrayList<Amortizacion>();
 
-        _amortizacionMercantil.add(new Amortizacion(plazoMercantil.getText(), amortMercantil.getSelectedIndex(), saldoBanescoDaf.getText(), 0, fechaMercantil.getText(), tasaMercantil.getText(), "0"));
+        _amortizacionMercantil.add(new Amortizacion(plazoMercantil.getText(), amortMercantil.getSelectedIndex(), saldoBanescoDaf.getText().replaceAll(",", ""), 0, fechaMercantil.getText(), tasaMercantil.getText(), "0"));
         FuncionesUtiles.escribirArchivo("DeudaMercantil.txt", _amortizacionMercantil, "Deuda", saldoBanescoDaf.getText(), fechaMercantil.getText(), plazoMercantil.getText());
 
         _amortizacionBanesco.add(new Amortizacion(plazoBanesco.getText(), amortBanesco.getSelectedIndex(), saldoBanescoDaf.getText(), 0, fechaBanesco.getText(), tasaBanesco.getText(), "0"));

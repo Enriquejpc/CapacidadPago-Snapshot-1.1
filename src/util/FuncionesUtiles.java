@@ -5,10 +5,9 @@
  */
 package util;
 
-import controlador.Amortizacion;
+import controlador.amortizaciones.Amortizacion;
 import java.io.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -146,6 +145,7 @@ public class FuncionesUtiles {
         NumberFormat nf_ = NumberFormat.getNumberInstance(Locale.US);
         DecimalFormat formatoDecimal = (DecimalFormat) nf_;
         formatoDecimal.applyPattern("###,###.###");
+        System.out.println("Retorno"+formatoDecimal.format(v));
         return (formatoDecimal.format(v));
         
     }
@@ -200,7 +200,7 @@ public class FuncionesUtiles {
 
             wr.append("\n N° Cuota");
             wr.append("\t\t\t\t\t\tFecha   ");
-            wr.append("\t\t\t\t\t\tTasa   ");
+            wr.append("\t\t\t\t\t\tTasax   ");
             wr.append("\t\t\t\t\t\tInteres   ");
             wr.append("\t\t\t\t\t\tMonto Cuota   ");
             wr.append("\t\t\t\t\t\tCapital   ");
@@ -213,8 +213,12 @@ public class FuncionesUtiles {
                     amortizacionBean = (AmortizacionBean) tabla.get(i).amortizacion(metodo).get(j);
 
                     amortizacionBean.getCapital();
-
+                    if (amortizacionBean.getNroCuota()== 37){
+                         System.out.println("hola"+amortizacionBean.getNroCuota());
+                    }
+                        
                     wr.append("\n" + amortizacionBean.getNroCuota());
+                   
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getFechaCobro());
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getTasa().toString());
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getInteres().toString());
