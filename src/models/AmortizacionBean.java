@@ -31,6 +31,10 @@ public final class AmortizacionBean {
     private BigDecimal sumaIntereses = new BigDecimal("0");
     private BigDecimal añoProyeccion = new BigDecimal("0");
     private int nroCuota;
+    private BigDecimal interesesAnio[];
+
+ 
+  
     /**
      * 
      * @return BigDecimal de cantidad Año Proyeccion
@@ -318,6 +322,21 @@ public final class AmortizacionBean {
 
     public void setNroCuota(int nroCuota) {
         this.nroCuota = nroCuota;
+    }
+    
+    
+    /**
+    * @Date 22/09/2016
+    * @author b586854
+    * @version 1.0
+    * Almacenamiento de los intereses acumulados de cada tabla de amortización.
+    * **/
+   public BigDecimal[] getInteresesAnio() {
+        return interesesAnio;
+    }
+
+    public void setInteresesAnio(BigDecimal[] interesesAnio) {
+        this.interesesAnio = interesesAnio;
     }
 
 }

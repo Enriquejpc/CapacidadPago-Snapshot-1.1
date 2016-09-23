@@ -259,7 +259,7 @@ public class SolicitudArchivo extends javax.swing.JFrame {
 
     private void jButtonDeudasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeudasActionPerformed
 
-        if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
+       /* if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
             JOptionPane.showMessageDialog(null, "El monto no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(montoSolicitado.getText())) {
@@ -295,13 +295,13 @@ public class SolicitudArchivo extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(comision.getText())) {
             JOptionPane.showMessageDialog(null, "La comisión debe ser númerico");
 
-        } else {
+        } else {*/
          
             Deudas deudas = new Deudas(_matrixSolicitud);
             deudas.setLocationRelativeTo(null);
             deudas.setVisible(true);
             this.setVisible(false);
-        }
+        /*}*/
 
 
     }//GEN-LAST:event_jButtonDeudasActionPerformed
@@ -370,7 +370,7 @@ public class SolicitudArchivo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCargaActionPerformed
 
     private void jButtonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentasActionPerformed
-        if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
+       /* if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
             JOptionPane.showMessageDialog(null, "El monto no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(montoSolicitado.getText())) {
@@ -406,16 +406,16 @@ public class SolicitudArchivo extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(comision.getText())) {
             JOptionPane.showMessageDialog(null, "La comisión debe ser númerico");
 
-        } else {
+        } else {*/
             Ventas ventas = new Ventas();
             ventas.setLocationRelativeTo(null);
             ventas.setVisible(true);
             this.setVisible(false);
-        }
+        /*}*/
     }//GEN-LAST:event_jButtonVentasActionPerformed
 
     private void jButtonBeneficioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBeneficioActionPerformed
-        if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
+       /* if (FuncionesUtiles.isVacio(montoSolicitado.getText())) {
             JOptionPane.showMessageDialog(null, "El monto no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(montoSolicitado.getText())) {
@@ -451,12 +451,12 @@ public class SolicitudArchivo extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(comision.getText())) {
             JOptionPane.showMessageDialog(null, "La comisión debe ser númerico");
 
-        } else {
+        } else {*/
             Beneficio beneficios = new Beneficio();
             beneficios.setLocationRelativeTo(null);
             beneficios.setVisible(true);
             this.setVisible(false);
-        }
+       /* }*/
     }//GEN-LAST:event_jButtonBeneficioActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

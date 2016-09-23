@@ -584,7 +584,7 @@ public class Deudas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButtonSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolicitudActionPerformed
-        if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
+        /*if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
             JOptionPane.showMessageDialog(null, "El saldo Deuda Capital  del banco Mercantil  no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(saldoMercantil.getText())) {
@@ -680,12 +680,12 @@ public class Deudas extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(tasaProvincial.getText())) {
             JOptionPane.showMessageDialog(null, "La fecha de la Deuda Capital del banco Provincial debe ser numerico");
 
-        } else {
+        } else {*/
             SolicitudArchivo solicitudArchivo = new SolicitudArchivo();
             solicitudArchivo.setLocationRelativeTo(null);
             solicitudArchivo.setVisible(true);
             this.setVisible(false);
-        }
+       // }
 
     }//GEN-LAST:event_jButtonSolicitudActionPerformed
 
@@ -694,7 +694,7 @@ public class Deudas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentasActionPerformed
-        if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
+       /* if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
             JOptionPane.showMessageDialog(null, "El saldo Deuda Capital  del banco Mercantil  no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(saldoMercantil.getText())) {
@@ -790,16 +790,16 @@ public class Deudas extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(tasaProvincial.getText())) {
             JOptionPane.showMessageDialog(null, "La fecha de la Deuda Capital del banco Provincial debe ser numerico");
 
-        } else {
+        } else {*/
             Ventas ventas = new Ventas();
             ventas.setLocationRelativeTo(null);
             ventas.setVisible(true);
             this.setVisible(false);
-        }
+       // }
     }//GEN-LAST:event_jButtonVentasActionPerformed
 
     private void jButtonBeneficioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBeneficioActionPerformed
-        if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
+        /*if (FuncionesUtiles.isVacio(saldoMercantil.getText())) {
             JOptionPane.showMessageDialog(null, "El saldo Deuda Capital  del banco Mercantil  no puede ser vacia");
 
         } else if (!FuncionesUtiles.isNumerico(saldoMercantil.getText())) {
@@ -895,12 +895,12 @@ public class Deudas extends javax.swing.JFrame {
         } else if (!FuncionesUtiles.isNumerico(tasaProvincial.getText())) {
             JOptionPane.showMessageDialog(null, "La fecha de la Deuda Capital del banco Provincial debe ser numerico");
 
-        } else {
+        } else {*/
             Beneficio beneficios = new Beneficio();
             beneficios.setLocationRelativeTo(null);
             beneficios.setVisible(true);
             this.setVisible(false);
-        }
+       // }
     }//GEN-LAST:event_jButtonBeneficioActionPerformed
 
     private void jButtonGenerarTablaAmortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarTablaAmortActionPerformed
@@ -919,11 +919,12 @@ public class Deudas extends javax.swing.JFrame {
         FuncionesUtiles.escribirArchivo("DeudaProvincial.txt", _amortizacionProvincial, "Deuda", saldoProvincialDaf.getText(), fechaProvincial.getText(), plazoProvincial.getText());
 
         if (solicituBean != null) {
-            for (int i = 0; i < solicituBean.size(); i++) {
-                _amortizacionSolicitud.add(new Amortizacion(solicituBean.get(i).getPlazoMeses().toString(), solicituBean.get(i).getAmortizaciones(), solicituBean.get(i).getMontoSolicitado().toString(), solicituBean.get(i).getDestino(), solicituBean.get(i).getFechaEstLiq(), solicituBean.get(i).getTasa().toString(), solicituBean.get(i).getComisionFlat().toString()));
-                FuncionesUtiles.escribirArchivo("SolicitudArchivo.txt", _amortizacionSolicitud, "Solicitud", solicituBean.get(i).getMontoSolicitado().toString(), solicituBean.get(i).getFechaEstLiq(), solicituBean.get(i).getPlazoMeses().toString());
+            System.out.println("Manco"+solicituBean.size());
+           /* for (int i = 0; i < solicituBean.size(); i++) {*/
+                _amortizacionSolicitud.add(new Amortizacion(solicituBean.get(0).getPlazoMeses().toString(), solicituBean.get(0).getAmortizaciones(), solicituBean.get(0).getMontoSolicitado().toString(), solicituBean.get(0).getDestino(), solicituBean.get(0).getFechaEstLiq(), solicituBean.get(0).getTasa().toString(), solicituBean.get(0).getComisionFlat().toString()));
+                FuncionesUtiles.escribirArchivo("SolicitudArchivo.txt", _amortizacionSolicitud, "Solicitud", solicituBean.get(0).getMontoSolicitado().toString(), solicituBean.get(0).getFechaEstLiq(), solicituBean.get(0).getPlazoMeses().toString());
                 jLabelMensaje.setText("Se generaron los Archivos de manera exitosa");
-            }
+         //  }
            
 
         } else {

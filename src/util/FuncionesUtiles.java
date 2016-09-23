@@ -142,11 +142,13 @@ public class FuncionesUtiles {
      * @return una cadena de String con el siguiente formato #########0.00
      */
     public static String formatoDouble(BigDecimal v) {
+       
         NumberFormat nf_ = NumberFormat.getNumberInstance(Locale.US);
         DecimalFormat formatoDecimal = (DecimalFormat) nf_;
         formatoDecimal.applyPattern("###,###.###");
-        System.out.println("Retorno"+formatoDecimal.format(v));
-        return (formatoDecimal.format(v));
+        //System.out.println("Retorno"+formatoDecimal.format(v));
+    
+        return (v.toString());
         
     }
 
@@ -185,6 +187,8 @@ public class FuncionesUtiles {
         AmortizacionBean amortizacionBean = new AmortizacionBean();
         ArrayList<Amortizacion> deuda;
         ArrayList<Amortizacion> solicitud;
+        String _auxAnio[] =fechaLiquidacion.split("/");
+        int _anio = Integer.parseInt(_auxAnio[2]);
         try {
             f = new File("C:\\BM_HOME\\appl\\MACE\\salida\\" + nombreArchivo);
             w = new FileWriter(f);
@@ -194,13 +198,12 @@ public class FuncionesUtiles {
             wr.append("\nMonto Liquidado:" + montoCredito);
             wr.append("\nFecha de Liquidación: " + fechaLiquidacion);
             wr.append("\nLa tasa (Utilizar 24%)");
-            wr.append("\nPlazo:" + plazo);
+            wr.append("\nPlazo:" + plazo);            
             wr.append("\n ");
-            wr.append("\n");
-
+            wr.append("\n");            
             wr.append("\n N° Cuota");
             wr.append("\t\t\t\t\t\tFecha   ");
-            wr.append("\t\t\t\t\t\tTasax   ");
+            wr.append("\t\t\t\t\t\tTasa   ");
             wr.append("\t\t\t\t\t\tInteres   ");
             wr.append("\t\t\t\t\t\tMonto Cuota   ");
             wr.append("\t\t\t\t\t\tCapital   ");
@@ -213,9 +216,9 @@ public class FuncionesUtiles {
                     amortizacionBean = (AmortizacionBean) tabla.get(i).amortizacion(metodo).get(j);
 
                     amortizacionBean.getCapital();
-                    if (amortizacionBean.getNroCuota()== 37){
+                   /* if (amortizacionBean.getNroCuota()== 37){
                          System.out.println("hola"+amortizacionBean.getNroCuota());
-                    }
+                    }*/
                         
                     wr.append("\n" + amortizacionBean.getNroCuota());
                    
@@ -230,8 +233,16 @@ public class FuncionesUtiles {
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getCapital().toString());
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getSaldo().toString());
 
-                }
+                }//Fin del For Anidado
+            }//Fin del For
+           // System.out.println("---"+amortizacionBean.getAñoProyeccion());
+            BigDecimal _auxIntereses[] = new BigDecimal[amortizacionBean.getInteresesAnio().length];
+            _auxIntereses = amortizacionBean.getInteresesAnio();
+            wr.append("\n Intereses Acumulados\n");
+            for (int intA=0;intA<amortizacionBean.getInteresesAnio().length; intA++){
+               wr.append("Año #"+(_anio+intA)+" Valor:"+_auxIntereses[intA]+"\n");
             }
+            
 
         } catch (Exception e) {
             /// JOptionPane.showMessageDialog(null, "Ha ocurrido un error al imprimir" + e);

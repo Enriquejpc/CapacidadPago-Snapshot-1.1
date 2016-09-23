@@ -53,7 +53,6 @@ public final class Amortizacion {
      */
     public Amortizacion(String plazo, int amortizacion, String montoSolicitado, int destino, String fecha, String tasa, String comisionFlat) {
         if (amortizacion == 5) {
-
             amortizacion = amortizacion + 1;
         }
 
@@ -82,11 +81,13 @@ public final class Amortizacion {
      * @return
      */
     public ArrayList<AmortizacionBean> amortizacion(String metodo) {
-        ArrayList<AmortizacionBean> retorno = new ArrayList<AmortizacionBean>();
+       int cont = 0;
+       ArrayList<AmortizacionBean> retorno = new ArrayList<AmortizacionBean>();
        if (metodo.equals("Solicitud") || metodo.equals("Deuda")) {
-            retorno = amortizacionDeudas();
+           cont++; 
+           retorno = amortizacionDeudas(metodo);
         } 
-
+        System.out.println("Total"+cont);
         return retorno;
     }
 
@@ -94,8 +95,9 @@ public final class Amortizacion {
      * Metodo que permite calcular la Amortización del Monto Solicitud
      *
      * @return ArrayList<AmortizacionBean>
+     * @param Metodo --> referencia al metodo porque si es la deuda por la solicitud debo añadir a los intereses del primer año el cobro de la comision flat
      */
-    public ArrayList<AmortizacionBean> amortizacionDeudas() {
+    public ArrayList<AmortizacionBean> amortizacionDeudas(String metodo) {
         ArrayList<AmortizacionBean> amortizacion = new ArrayList<AmortizacionBean>();
         int dia;
         int mes;
@@ -103,9 +105,7 @@ public final class Amortizacion {
         dia = Integer.parseInt(fecha.substring(0, 2));
         mes = Integer.parseInt(fecha.substring(3, 5));
         año = Integer.parseInt(fecha.substring(6, 10));
-        
-        //System.out.println("E"+ this.periodicidad+"-"+this.tipoCobro+"xxx"+this.montoSolicitado);
-        
+       
         for (int _cuotaActual = 0; _cuotaActual <= this.plazo.intValueExact(); _cuotaActual++) {
             amortizacionBean = new AmortizacionBean();
             if (_cuotaActual == 0) {
@@ -167,11 +167,170 @@ public final class Amortizacion {
             cuotaActual = cuotaActual + 1;
             amortizacion.add(amortizacionBean);
         }
-           iA(amortizacion);
+           amortizacionBean.setInteresesAnio( iA(amortizacion,metodo));
         return amortizacion;
     }
 
+  /**
+     *
+     * @return un Bigdecimal de porcion Corriente Corregida
+     */
+    public BigDecimal pCC(ArrayList<AmortizacionBean> amortizacion) {
+        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
+        BigDecimal porAño;
+        //int a = amortizacionBean.getDestino() ;
+        if (amortizacionBean.getDestino() == 2) {
+           // System.out.println("a");
+            return porcionCorrienteCorregida;
+        } else {
+            for (int i = 1; i <= this.cantidadAñoProyeccion.intValue(); i++) {
+                if (i == 1) {
+                    porAño = new BigDecimal(String.valueOf(i));
+                    porcionCorrienteCorregida = this.sumCapital.divide(porAño);
+                    //System.out.println("PCC"+porcionCorrienteCorregida);
+                }
+            }
+            return porcionCorrienteCorregida;
+        }
+    }
+
     /**
+     *
+     * @return un BigDecimal de porcion Corriente Deuda Largo Plazo
+     */
+    public BigDecimal pCDLP(ArrayList<AmortizacionBean> amortizacion) {
+        BigDecimal porcionCorrienteDeudaLargoPlazo = new BigDecimal("0");
+        BigDecimal porAño;
+        if (amortizacionBean.getDestino() == 2) {
+            porcionCorrienteDeudaLargoPlazo = new BigDecimal("0");
+        } else {
+
+            for (int i = 1; i <= this.cantidadAñoProyeccion.intValue(); i++) {
+                if (i >= 2) {
+                    porAño = new BigDecimal(String.valueOf(i));
+                    porcionCorrienteDeudaLargoPlazo = this.sumCapital.divide(porAño);
+                }
+            }
+        }
+        return porcionCorrienteDeudaLargoPlazo;
+    }
+
+    /**
+     *
+     * @return un Bigdecimal de deuda Largo Plazo
+     */
+    public BigDecimal dLP(ArrayList<AmortizacionBean> amortizacion) {
+        BigDecimal deudaLargoPlazo = new BigDecimal("0");
+        if (amortizacionBean.getDestino() == 2) {
+            return deudaLargoPlazo;
+        } else if (this.cantidadAñoProyeccion.intValue() == 0) {
+            deudaLargoPlazo = amortizacionBean.getCapital().subtract(pCC(amortizacion).subtract(pCDLP(amortizacion)));
+
+        } else {
+            deudaLargoPlazo = deudaLargoPlazo.subtract(pCDLP(amortizacion));
+        }
+
+        return deudaLargoPlazo;
+    }
+
+    /**
+     *
+     * @return un BigDecimal de intereses Acumulados
+     */
+    public BigDecimal[] iA(ArrayList<AmortizacionBean> amortizacion, String metodo) {
+        BigDecimal interesesAcumulados = new BigDecimal("0");
+        SolicitudBean _acceso = new SolicitudBean();
+        String _date[] = this.fecha.split("/");//Fecha de Liquidacion
+        int plazo =  this.plazo.intValue();// Plazo en Meses
+        int _mm = Integer.parseInt(_date[1]);// 
+        int _yyyy = Integer.parseInt(_date[2]);
+        int valor = _acceso.getDestino();
+        int plazoAnualizado = (plazo/12)+1;//Plazo anualizado
+        BigDecimal interesesAnio[] = new BigDecimal[plazoAnualizado];//Array de prueba para guardar los interese acumulados por año
+        int anioCtrl = 0 ;//Año que me indica la posicion donde guardare los intereses acumulados
+        BigDecimal CobroFlat = amortizacionBean.getComisionFlat().multiply(amortizacionBean.getMontoSolicitado());
+        if("Solicitud".compareToIgnoreCase(metodo) == 0){
+            CobroFlat = amortizacionBean.getComisionFlat().multiply(amortizacionBean.getMontoSolicitado());
+        }else{
+            CobroFlat = new BigDecimal(BigInteger.ZERO);
+        }
+        
+        for (int y = 0; y<=this.plazo.intValue(); y++ )
+        {
+         if (_mm<=12){
+            interesesAcumulados = interesesAcumulados.add(amortizacion.get(y).getInteres());
+            _mm++;
+            interesesAnio[anioCtrl] = interesesAcumulados;
+           
+         } else{
+             //System.out.println("Salida"+interesesAcumulados);
+            anioCtrl++; 
+            _mm = 1;
+            _yyyy = _yyyy - 1;
+            interesesAcumulados = new BigDecimal(BigInteger.ZERO);
+            y = y - 1;
+         }
+        }
+      
+    /*  for (int x = 0;x<plazoAnualizado;x++){
+          System.out.println(interesesAnio[x]);
+      }
+        /* if (valor == 1)// Capital de Trabajo
+       {
+           for (int i = 0;i<this.cantidadAñoProyeccion.intValue(); i++)
+           {
+                if (i == 0){
+                    interesesAcumulados = amortizacion.get(i).getCapital().multiply(this.comisionFlat);
+                }else{
+                    //interesesAcumulados = 
+                }
+           }
+       }*/
+       // System.out.println("Value-->"+interesesAnio);
+        return interesesAnio;
+    }
+
+    /**
+     *
+     * @return un BigDecima de porcion Corriente Corregida
+     */
+    /*public BigDecimal pCCAF() {
+        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
+        if (this.cantidadAñoProyeccion.intValue() == 1) {
+            porcionCorrienteCorregida = amortizacionBean.getCapital();
+        }
+        return porcionCorrienteCorregida;
+    }*/
+
+    /**
+     *
+     * @return un BigDecimal de porcion Corriente Corregida
+     */
+    /*public BigDecimal pCDLPAF() {
+        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
+        for (int i = 0; i < this.cantidadAñoProyeccion.intValue(); i++) {
+            porcionCorrienteCorregida = amortizacionBean.getInteres().add(amortizacionBean.getInteres()).divide(amortizacionBean.getCantidadAñoProyeccion());
+        }
+        return porcionCorrienteCorregida = amortizacionBean.getInteres();
+    }*/
+
+    /**
+     *
+     * @return un BigDecimal de deuda Largo Plazo
+     */
+   /* public BigDecimal dLPAF() {
+        BigDecimal deudaLargoPlazo = new BigDecimal("0");
+
+        if (this.cantidadAñoProyeccion.intValue() == 0) {
+            deudaLargoPlazo = amortizacionBean.getCapital().subtract(pCC().subtract(pCDLP()));
+        } else {
+            deudaLargoPlazo = deudaLargoPlazo.subtract(pCDLP());
+        }
+
+        return deudaLargoPlazo;
+    }*/
+
+  /**
      * Metodo que permite calcular la Amortización de la Deuda
      *
      * @return ArrayList<AmortizacionBean>
@@ -281,177 +440,6 @@ public final class Amortizacion {
       
    
         return amortizacion;
-    }*/
-
-    /**
-     *
-     * @return un Bigdecimal de porcion Corriente Corregida
-     */
-    public BigDecimal pCC(ArrayList<AmortizacionBean> amortizacion) {
-        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
-        BigDecimal porAño;
-        //int a = amortizacionBean.getDestino() ;
-        if (amortizacionBean.getDestino() == 2) {
-           // System.out.println("a");
-            return porcionCorrienteCorregida;
-        } else {
-            for (int i = 1; i <= this.cantidadAñoProyeccion.intValue(); i++) {
-                if (i == 1) {
-                    porAño = new BigDecimal(String.valueOf(i));
-                    porcionCorrienteCorregida = this.sumCapital.divide(porAño);
-                    //System.out.println("PCC"+porcionCorrienteCorregida);
-                }
-            }
-            return porcionCorrienteCorregida;
-        }
-    }
-
-    /**
-     *
-     * @return un BigDecimal de porcion Corriente Deuda Largo Plazo
-     */
-    public BigDecimal pCDLP(ArrayList<AmortizacionBean> amortizacion) {
-        BigDecimal porcionCorrienteDeudaLargoPlazo = new BigDecimal("0");
-        BigDecimal porAño;
-        if (amortizacionBean.getDestino() == 2) {
-            porcionCorrienteDeudaLargoPlazo = new BigDecimal("0");
-        } else {
-
-            for (int i = 1; i <= this.cantidadAñoProyeccion.intValue(); i++) {
-                if (i >= 2) {
-                    porAño = new BigDecimal(String.valueOf(i));
-                    porcionCorrienteDeudaLargoPlazo = this.sumCapital.divide(porAño);
-                }
-            }
-        }
-        return porcionCorrienteDeudaLargoPlazo;
-    }
-
-    /**
-     *
-     * @return un Bigdecimal de deuda Largo Plazo
-     */
-    public BigDecimal dLP(ArrayList<AmortizacionBean> amortizacion) {
-        BigDecimal deudaLargoPlazo = new BigDecimal("0");
-        if (amortizacionBean.getDestino() == 2) {
-            return deudaLargoPlazo;
-        } else if (this.cantidadAñoProyeccion.intValue() == 0) {
-            deudaLargoPlazo = amortizacionBean.getCapital().subtract(pCC(amortizacion).subtract(pCDLP(amortizacion)));
-
-        } else {
-            deudaLargoPlazo = deudaLargoPlazo.subtract(pCDLP(amortizacion));
-        }
-
-        return deudaLargoPlazo;
-    }
-
-    /**
-     *
-     * @return un BigDecimal de intereses Acumulados
-     */
-    public BigDecimal iA(ArrayList<AmortizacionBean> amortizacion) {
-        BigDecimal interesesAcumulados = new BigDecimal("0");
-        SolicitudBean _acceso = new SolicitudBean();
-        String _date[] = this.fecha.split("/");//Fecha de Liquidacion
-        int plazo =  this.plazo.intValue();// Plazo en Meses
-        int _mm = Integer.parseInt(_date[1]);// 
-        int _yyyy = Integer.parseInt(_date[2]);
-        int valor = _acceso.getDestino();
-        int plazoAnualizado = (plazo/12)+1;//Plazo anualizado
-        BigDecimal interesesAnio[] = new BigDecimal[plazoAnualizado];//Array de prueba para guardar los interese acumulados por año
-        int anioCtrl = 0 ;//Año que me indica la posicion donde guardare los intereses acumulados
-        for (int y = 0; y<=this.plazo.intValue(); y++ )
-        {
-         if (_mm<=12){
-            interesesAcumulados = interesesAcumulados.add(amortizacion.get(y).getInteres());
-            _mm++;
-            interesesAnio[anioCtrl] = interesesAcumulados;
-           
-         } else{
-            anioCtrl++; 
-            _mm = 1;
-            _yyyy = _yyyy - 1;
-            interesesAcumulados = new BigDecimal(BigInteger.ZERO);
-            //y = y + 1;
-         }
-        }
-      System.out.println("--"+this.montoSolicitado);  
-      for (int x = 0;x<plazoAnualizado;x++){
-          System.out.println(interesesAnio[x]);
-      }
-        /* if (valor == 1)// Capital de Trabajo
-       {
-           for (int i = 0;i<this.cantidadAñoProyeccion.intValue(); i++)
-           {
-                if (i == 0){
-                    interesesAcumulados = amortizacion.get(i).getCapital().multiply(this.comisionFlat);
-                }else{
-                    //interesesAcumulados = 
-                }
-           }
-       }
-        /*if (this.cantidadAñoProyeccion.intValue() == 0) {
-            if (amortizacionBean.getDestino() == 2) {
-                interesesAcumulados = amortizacionBean.getCapital().multiply(this.comisionFlat);
-                System.out.println("jsfsdfhjksd");
-            } else {
-                interesesAcumulados = amortizacionBean.getInteres().add(amortizacionBean.getCapital()).multiply(this.comisionFlat);
-            }
-        } else {
-            interesesAcumulados = amortizacionBean.getInteres().divide(this.cantidadAñoProyeccion);
-        }
-        System.out.println("Interese"+interesesAcumulados);*/
-        return interesesAcumulados;
-    }
-
-    /**
-     *
-     * @return un BigDecima de porcion Corriente Corregida
-     */
-    /*public BigDecimal pCCAF() {
-        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
-        if (this.cantidadAñoProyeccion.intValue() == 1) {
-            porcionCorrienteCorregida = amortizacionBean.getCapital();
-        }
-        return porcionCorrienteCorregida;
-    }*/
-
-    /**
-     *
-     * @return un BigDecimal de porcion Corriente Corregida
-     */
-    /*public BigDecimal pCDLPAF() {
-        BigDecimal porcionCorrienteCorregida = new BigDecimal("0");
-        for (int i = 0; i < this.cantidadAñoProyeccion.intValue(); i++) {
-            porcionCorrienteCorregida = amortizacionBean.getInteres().add(amortizacionBean.getInteres()).divide(amortizacionBean.getCantidadAñoProyeccion());
-        }
-        return porcionCorrienteCorregida = amortizacionBean.getInteres();
-    }*/
-
-    /**
-     *
-     * @return un BigDecimal de deuda Largo Plazo
-     */
-   /* public BigDecimal dLPAF() {
-        BigDecimal deudaLargoPlazo = new BigDecimal("0");
-
-        if (this.cantidadAñoProyeccion.intValue() == 0) {
-            deudaLargoPlazo = amortizacionBean.getCapital().subtract(pCC().subtract(pCDLP()));
-        } else {
-            deudaLargoPlazo = deudaLargoPlazo.subtract(pCDLP());
-        }
-
-        return deudaLargoPlazo;
-    }*/
-
-    /**
-     *
-     * @return un BigDecimal de intereses Acumulados
-     */
-    /*public BigDecimal iAAF() {
-        BigDecimal interesesAcumulados = new BigDecimal("0");
-
-        return interesesAcumulados;
     }*/
 
 }
