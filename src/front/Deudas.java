@@ -919,7 +919,7 @@ public class Deudas extends javax.swing.JFrame {
         FuncionesUtiles.escribirArchivo("DeudaProvincial.txt", _amortizacionProvincial, "Deuda", saldoProvincialDaf.getText(), fechaProvincial.getText(), plazoProvincial.getText());
 
         if (solicituBean != null) {
-            System.out.println("Manco"+solicituBean.size());
+           // System.out.println("Manco"+solicituBean.size());
            /* for (int i = 0; i < solicituBean.size(); i++) {*/
                 _amortizacionSolicitud.add(new Amortizacion(solicituBean.get(0).getPlazoMeses().toString(), solicituBean.get(0).getAmortizaciones(), solicituBean.get(0).getMontoSolicitado().toString(), solicituBean.get(0).getDestino(), solicituBean.get(0).getFechaEstLiq(), solicituBean.get(0).getTasa().toString(), solicituBean.get(0).getComisionFlat().toString()));
                 FuncionesUtiles.escribirArchivo("SolicitudArchivo.txt", _amortizacionSolicitud, "Solicitud", solicituBean.get(0).getMontoSolicitado().toString(), solicituBean.get(0).getFechaEstLiq(), solicituBean.get(0).getPlazoMeses().toString());

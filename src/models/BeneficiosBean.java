@@ -25,7 +25,7 @@ public class BeneficiosBean implements Comparable<BeneficiosBean> {
     private BigDecimal bnoVentas;
     private BigDecimal porcGasto;
     private BigDecimal porcCostos;
-   
+    
 
  
     /**
@@ -42,7 +42,7 @@ public class BeneficiosBean implements Comparable<BeneficiosBean> {
      *
      */
     public BeneficiosBean(String tipo, String fecha,
-            String meses, String bnoVentas, String porcGasto, String porcCostos) {
+            String meses, String porcCostos, String porcGasto, String bnoVentas) {
 
         this.tipo = tipo;
         this.fecha = fecha;
@@ -137,7 +137,8 @@ public class BeneficiosBean implements Comparable<BeneficiosBean> {
     **/
     @Override
     public int compareTo(BeneficiosBean b) {
-       return this.getBnoVentas().compareTo(b.getBnoVentas());
+        int compareage=((BeneficiosBean)b).getBnoVentas().intValue();
+        return this.getBnoVentas().intValue()-compareage;
     }
 
     public BigDecimal getPorcGasto() {
@@ -156,4 +157,5 @@ public class BeneficiosBean implements Comparable<BeneficiosBean> {
         this.porcCostos = porcCostos;
     }
 
+   
 }

@@ -197,7 +197,7 @@ public class FuncionesUtiles {
             wr.write("Información de la deuda que esta generando.");
             wr.append("\nMonto Liquidado:" + montoCredito);
             wr.append("\nFecha de Liquidación: " + fechaLiquidacion);
-            wr.append("\nLa tasa (Utilizar 24%)");
+            wr.append("\nTasa : 24%");
             wr.append("\nPlazo:" + plazo);            
             wr.append("\n ");
             wr.append("\n");            
@@ -208,20 +208,14 @@ public class FuncionesUtiles {
             wr.append("\t\t\t\t\t\tMonto Cuota   ");
             wr.append("\t\t\t\t\t\tCapital   ");
             wr.append("\t\t\t\t\t\tSaldo   ");
-
+            System.out.println("");
             for (int i = 0; i < tabla.size(); i++) {
 
                 for (int j = 0; j < tabla.get(i).amortizacion(metodo).size(); j++) {
 
                     amortizacionBean = (AmortizacionBean) tabla.get(i).amortizacion(metodo).get(j);
-
                     amortizacionBean.getCapital();
-                   /* if (amortizacionBean.getNroCuota()== 37){
-                         System.out.println("hola"+amortizacionBean.getNroCuota());
-                    }*/
-                        
                     wr.append("\n" + amortizacionBean.getNroCuota());
-                   
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getFechaCobro());
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getTasa().toString());
                     wr.append("\t\t\t\t\t\t\t" + amortizacionBean.getInteres().toString());
@@ -242,8 +236,35 @@ public class FuncionesUtiles {
             for (int intA=0;intA<amortizacionBean.getInteresesAnio().length; intA++){
                wr.append("Año #"+(_anio+intA)+" Valor:"+_auxIntereses[intA]+"\n");
             }
-            
-
+           
+            /**
+             *
+             * */
+            BigDecimal _auxPorcionCte[] = new BigDecimal[amortizacionBean.getPorcionCteCorrAnio().length];
+            _auxPorcionCte = amortizacionBean.getPorcionCteCorrAnio();
+            wr.append("\n Porción Corriente Corregida\n");
+            for (int intA=0;intA<amortizacionBean.getPorcionCteCorrAnio().length; intA++){
+               wr.append("Año #"+(_anio+intA)+" Valor:"+_auxPorcionCte[intA]+"\n");
+            }
+             /**
+             *
+             * */
+            BigDecimal _auxPorcionCteDeudaLP[] = new BigDecimal[amortizacionBean.getPorcionCteCorrDeudaLPAnio().length];
+            _auxPorcionCteDeudaLP = amortizacionBean.getPorcionCteCorrDeudaLPAnio();
+            wr.append("\n Porción Corriente Deuda Largo Plazo\n");
+            for (int intA=1;intA<amortizacionBean.getPorcionCteCorrDeudaLPAnio().length; intA++){
+               wr.append("Año #"+(_anio+intA-1)+" Valor:"+_auxPorcionCteDeudaLP[intA]+"\n");
+            }
+            wr.append("Año #"+(_anio+(Integer.parseInt(plazo)/12)/*intA*/)+" Valor:"+0+"\n");
+             /**
+             *
+             * */
+             BigDecimal _auxDeudaLP[] = new BigDecimal[amortizacionBean.getDeudaLargoPzo().length];
+            _auxDeudaLP = amortizacionBean.getDeudaLargoPzo();
+            wr.append("\n Deuda Largo Plazo\n");
+            for (int intA=0;intA<amortizacionBean.getDeudaLargoPzo().length; intA++){
+               wr.append("Año #"+(_anio+intA)+" Valor:"+_auxDeudaLP[intA]+"\n");
+            }
         } catch (Exception e) {
             /// JOptionPane.showMessageDialog(null, "Ha ocurrido un error al imprimir" + e);
             e.printStackTrace();

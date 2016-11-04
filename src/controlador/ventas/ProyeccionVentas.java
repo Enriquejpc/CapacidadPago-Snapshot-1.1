@@ -16,10 +16,10 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.BeneficiosBean;
+
 import models.ParametrosBean;
 import models.SolicitudBean;
 import models.VentasBean;
@@ -45,7 +45,7 @@ public class ProyeccionVentas {
         boolean indicadorCorte = false;
         int AnioCtrl = 0;
         int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue()+1;
-
+        System.out.println("\033[32m"+NroAniosProy);
         double _VentasPermitida = (_MaxVentas);// Maximo permitido por el BCV
         double _PorcionCalculada = 0;//Porcion correspondiente a las ventas para finalizar el año que posee corte;
         double aux = 0; // Calculamos los valores correspondientes
@@ -144,7 +144,7 @@ public class ProyeccionVentas {
                         _PorcCrecimiento = DevolverPorcInflacionEsperada(AnioCtrl);
                         _ProyMatrizCrecimiento.add(0,_PorcCrecimiento);
                 }
-                  for (int i =1; i<NroAniosProy;i++){//For con semilla en 1 porque ya calculamos la porcion para fin de año de corte
+                  for (int i =1; i<(NroAniosProy);i++){//For con semilla en 1 porque ya calculamos la porcion para fin de año de corte
                       _PorcCrecimiento = DevolverPorcInflacionEsperada(AnioCtrl + i);
                       _porcA = new BigDecimal(_PorcCrecimiento).setScale(2, BigDecimal.ROUND_CEILING);
 
@@ -308,7 +308,7 @@ public class ProyeccionVentas {
         /**
          * Se anualiza el plazo
          */
-        int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue();
+        int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue()+1;
         ArrayList<String> Conceptos = new ArrayList<>();
 
         Conceptos.add("Ventas\t");

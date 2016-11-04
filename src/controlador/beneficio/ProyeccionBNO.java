@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +48,18 @@ public class ProyeccionBNO {
          * costos va a tomar el valor que este en la columna indice
          */
         if (_IndicEscenario == 1) {
+            /*Comparator<BeneficiosBean> comparator = new Comparator<BeneficiosBean>() {
+            @Override
+            public int compare(BeneficiosBean c1, BeneficiosBean c2) {
+                
+                return (c1.getBnoVentas().intValue() - c1.getBnoVentas().intValue()); // use your logic
+            }
+            };*/
             Collections.sort(_matrixBeneficio);
+            
+             for(BeneficiosBean str: _matrixBeneficio){
+			System.out.println(str.getBnoVentas());
+	   }
            _exito = GenerarArchivoSalidaConservador(_matrixBeneficio, indice, anio[2]);
         }
         /**
@@ -66,7 +78,7 @@ public class ProyeccionBNO {
                 // 2) Como el vaciado tiene cortes debo en todo momento evaluarlos
                 if (indicadorCorte == true) {
                     // 3) Calculo el %BNO Proyectado y le aplico las condiciones.
-                    _BNOCalculado = BNOproyModerado(_matrixBeneficio, indicadorCorte);
+                   _BNOCalculado = BNOproyModerado(_matrixBeneficio, indicadorCorte);
                    criterio = (CompareDouble(_BNOCalculado, _BNOPermitido));
                     if (criterio == 1) {//1 - Indica que el calculado es mayor al permitido
                         _BNOProyectado = _BNOPermitido;
@@ -97,7 +109,8 @@ public class ProyeccionBNO {
         /**
          * Se anualiza el plazo
          */
-        int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue();
+        System.out.println("Indice value"+indice);
+        int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue()+1;
         ArrayList<String> Conceptos = new ArrayList<>();
 
         Conceptos.add("%Costo");
@@ -121,8 +134,10 @@ public class ProyeccionBNO {
             }
 
             wr.append("\n" + Conceptos.get(0) );
-            wr.append(Tabulacion);
+            wr.append("   \t");
+            
             for (int columna = 0; columna < NroAniosProy; columna++) {
+               System.out.println((_matrixBeneficio.get(indice).getPorcCostos()).toString().replace(".", ",") + "%\t");
                 wr.append((_matrixBeneficio.get(indice).getPorcCostos()).toString().replace(".", ",") + "%\t");
             }
             wr.append("\n" + Conceptos.get(1));
@@ -131,7 +146,7 @@ public class ProyeccionBNO {
                 wr.append((_matrixBeneficio.get(indice).getPorcGasto()).toString().replace(".", ",") + "%\t");
             }
             wr.append("\n" + Conceptos.get(2));
-            wr.append("   \t");
+            wr.append(Tabulacion);
             for (int columna = 0; columna < NroAniosProy; columna++) {
                 wr.append((_matrixBeneficio.get(indice).getBnoVentas()).toString().replace(".", ",") + "%\t");
             }

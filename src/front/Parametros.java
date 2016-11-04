@@ -134,7 +134,7 @@ public class Parametros extends javax.swing.JFrame {
         getContentPane().add(_2018Inf);
         _2018Inf.setBounds(390, 90, 28, 20);
 
-        _2019Inf.setText("98,3");
+        _2019Inf.setText("93,3");
         getContentPane().add(_2019Inf);
         _2019Inf.setBounds(440, 90, 30, 20);
 

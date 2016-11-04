@@ -32,8 +32,13 @@ public final class AmortizacionBean {
     private BigDecimal añoProyeccion = new BigDecimal("0");
     private int nroCuota;
     private BigDecimal interesesAnio[];
+    private BigDecimal porcionCteCorrAnio[];
+    private BigDecimal porcionCteCorrDeudaLPAnio[];
+    private BigDecimal DeudaLargoPzo[];
 
- 
+    
+    
+  
   
     /**
      * 
@@ -338,5 +343,47 @@ public final class AmortizacionBean {
     public void setInteresesAnio(BigDecimal[] interesesAnio) {
         this.interesesAnio = interesesAnio;
     }
+    
+    /**
+    * @Date 11/10/2016
+    * @author b586854
+    * @version 1.0
+    * Almacenamiento de la porción corriente corregida de cada tabla de amortización.
+    * **/
+    public BigDecimal[] getPorcionCteCorrAnio() {
+        return porcionCteCorrAnio;
+    }
 
+    public void setPorcionCteCorrAnio(BigDecimal[] porcionCteCorrAnio) {
+        this.porcionCteCorrAnio = porcionCteCorrAnio;
+    }
+     /**
+    * @Date 11/10/2016
+    * @author b586854
+    * @version 1.0
+    * Almacenamiento de la porción corriente corregida de cada tabla de amortización.
+    * **/
+    public BigDecimal[] getPorcionCteCorrDeudaLPAnio() {
+        return porcionCteCorrDeudaLPAnio;
+    }
+
+    public void setPorcionCteCorrDeudaLPAnio(BigDecimal[] porcionCteCorrDeudaLPAnio) {
+        this.porcionCteCorrDeudaLPAnio = porcionCteCorrDeudaLPAnio;
+    }
+   
+    /**
+    * @Date 11/10/2016
+    * @author b586854
+    * @version 1.0
+    * Almacenamiento de la Deuda a Largo Plazo.
+    * **/
+    
+    public BigDecimal[] getDeudaLargoPzo() {
+        return DeudaLargoPzo;
+    }
+
+    public void setDeudaLargoPzo(BigDecimal[] DeudaLargoPzo) {
+        this.DeudaLargoPzo = DeudaLargoPzo;
+    }
+    
 }
