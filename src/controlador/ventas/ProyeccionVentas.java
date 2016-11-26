@@ -34,9 +34,9 @@ public class ProyeccionVentas {
     SolicitudBean _accesoSolicitud = new SolicitudBean();
     Parametros _accesoParametros = new Parametros();
     ParametrosBean _paramBean;
-    static ArrayList<ParametrosBean> _matrixParametros = new ArrayList<>();
-    static ArrayList<Double> _ProyMatrizCrecimiento = new ArrayList<>();
-    static ArrayList<BigDecimal> _ProyMatrizVentas = new ArrayList<>();
+    static ArrayList<ParametrosBean> _matrixParametros = new ArrayList();
+    static ArrayList<Double> _ProyMatrizCrecimiento = new ArrayList();
+    static ArrayList<BigDecimal> _ProyMatrizVentas = new ArrayList();
 
     public boolean ProyectarVentas(ArrayList<VentasBean> _matrixVentas, int _IndicEscenario, int _MaxVentas) {
         int AnioIndiceCorte = 0;
@@ -309,7 +309,7 @@ public class ProyeccionVentas {
          * Se anualiza el plazo
          */
         int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue()+1;
-        ArrayList<String> Conceptos = new ArrayList<>();
+        ArrayList<String> Conceptos = new ArrayList();
 
         Conceptos.add("Ventas\t");
         Conceptos.add("%Crecimiento Ventas\t");

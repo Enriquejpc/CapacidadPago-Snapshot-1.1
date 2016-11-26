@@ -62,7 +62,14 @@ public class SolicitudBean {
             this.vigenciaTasa = new BigDecimal(vigenciaTasa);
         }
 
-        switch (cartera) {
+        
+        if(cartera.compareToIgnoreCase("Comercial")==0)
+            this.cartera = 1;
+        if(cartera.compareToIgnoreCase("Pymi")==0)
+            this.cartera = 2;
+        if(cartera.compareToIgnoreCase("Manufactura")==0)
+            this.cartera = 3;
+        /*switch (cartera) {
             case "Comercial":
                 this.cartera = 1;
                 break;
@@ -74,7 +81,7 @@ public class SolicitudBean {
                 break;
             default:
                 break;
-        }
+        }*/
 
         if (!FuncionesUtiles.parametrosIsNull(plazoMeses)) {
             this.plazoMeses = new BigDecimal(plazoMeses);
@@ -87,7 +94,20 @@ public class SolicitudBean {
         if (!FuncionesUtiles.parametrosIsNull(comisionFlat)) {
             this.comisionFlat = new BigDecimal(comisionFlat);
         }
-        switch (amortizaciones) {
+        
+        if(amortizaciones.compareToIgnoreCase("Mensual")==0)
+            this.amortizaciones = 1;
+        if(amortizaciones.compareToIgnoreCase("Bimestral")==0)
+            this.amortizaciones = 2;
+        if(amortizaciones.compareToIgnoreCase("Trimestral")==0)
+            this.amortizaciones = 3;
+        if(amortizaciones.compareToIgnoreCase("Cuatrimestral")==0)
+            this.amortizaciones = 4;
+        if(amortizaciones.compareToIgnoreCase("Semestral")==0)
+            this.amortizaciones = 5;
+            
+        
+        /*switch (amortizaciones) {
 
             case "Mensual":
                 this.amortizaciones = 1;
@@ -106,9 +126,15 @@ public class SolicitudBean {
                 break;
             default:
                 break;
-        }
+        }*/
 
-        switch (escenario) {
+        if(escenario.compareToIgnoreCase("Conservador")==0)
+            this.escenario = 1;
+        if(escenario.compareToIgnoreCase("Moderado")==0)
+            this.escenario = 2;
+        if(escenario.compareToIgnoreCase("Parametizable")==0)
+            this.escenario = 3;
+        /*switch (escenario) {
             case "Conservador":
                 this.escenario = 1;
                 break;
@@ -120,9 +146,13 @@ public class SolicitudBean {
                 break;
             default:
                 break;
-        }
-
-        switch (destino) {
+        }*/
+        
+        if(destino.compareToIgnoreCase("Activo Fijo")==0)
+            this.destino = 1;
+        if(destino.compareToIgnoreCase("Capital Trabajo")==0)
+            this.destino = 2;
+        /*switch (destino) {
             case "Activo Fijo":
                 this.destino = 1;
                 break;
@@ -131,7 +161,7 @@ public class SolicitudBean {
                 break;
             default:
                 break;
-        }
+        }*/
     }
 
     /**

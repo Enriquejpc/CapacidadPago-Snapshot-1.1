@@ -61,8 +61,19 @@ public class DeudasBean {
             this.fechaMercantil = fecha;
             this.plazoMercantil = new BigDecimal(plazo);
             this.tasaMercantil = new BigDecimal(tasa);
-
-            switch (amortizacion) {
+            
+            
+            if(amortizacion.compareToIgnoreCase("MENSUAL")==0)
+              this.amortizacionMercantil = 1;
+             if(amortizacion.compareToIgnoreCase("BIMESTRAL")==0)
+              this.amortizacionMercantil = 2;
+             if(amortizacion.compareToIgnoreCase("TRIMESTRAL")==0)
+              this.amortizacionMercantil = 3;
+             if(amortizacion.compareToIgnoreCase("CUATRIMESTRAL")==0)
+              this.amortizacionMercantil = 4;
+             if(amortizacion.compareToIgnoreCase("SEMESTRAL")==0)
+              this.amortizacionMercantil = 5;
+            /*switch (amortizacion) {
 
                 case "MENSUAL":
                     this.amortizacionMercantil = 1;
@@ -81,13 +92,25 @@ public class DeudasBean {
                     break;
                 default:
                     break;
-            }
+            }*/
         } else if (banco.equals("002")) {
             this.saldoBcoBanescoDaf = new BigDecimal(saldo);
             this.fechaBanesco = fecha;
             this.plazoBanesco = new BigDecimal(plazo);
             this.tasaBanesco = new BigDecimal(tasa);
-            switch (amortizacion) {
+           
+             if(amortizacion.compareToIgnoreCase("MENSUAL")==0)
+              this.amortizacionBanesco = 1;
+             if(amortizacion.compareToIgnoreCase("BIMESTRAL")==0)
+              this.amortizacionBanesco = 2;
+             if(amortizacion.compareToIgnoreCase("TRIMESTRAL")==0)
+              this.amortizacionBanesco = 3;
+             if(amortizacion.compareToIgnoreCase("CUATRIMESTRAL")==0)
+              this.amortizacionBanesco = 4;
+             if(amortizacion.compareToIgnoreCase("SEMESTRAL")==0)
+              this.amortizacionBanesco = 5;
+            
+            /* switch (amortizacion) {
                 case "MENSUAL":
                     this.amortizacionBanesco = 1;
                     break;
@@ -105,7 +128,7 @@ public class DeudasBean {
                     break;
                 default:
                     break;
-            }
+            }*/
 
         } else if (banco.equals("003")) {
             this.saldoBcoProvincialDaf = new BigDecimal(saldo);
@@ -113,7 +136,17 @@ public class DeudasBean {
             this.plazoProvincial = new BigDecimal(plazo);
             this.tasaProvincial = new BigDecimal(tasa);
 
-            switch (amortizacion) {
+             if(amortizacion.compareToIgnoreCase("MENSUAL")==0)
+              this.amortizacionProvincial = 1;
+             if(amortizacion.compareToIgnoreCase("BIMESTRAL")==0)
+              this.amortizacionProvincial = 2;
+             if(amortizacion.compareToIgnoreCase("TRIMESTRAL")==0)
+              this.amortizacionProvincial = 3;
+             if(amortizacion.compareToIgnoreCase("CUATRIMESTRAL")==0)
+              this.amortizacionProvincial = 4;
+             if(amortizacion.compareToIgnoreCase("SEMESTRAL")==0)
+              this.amortizacionProvincial = 5;
+            /*switch (amortizacion) {
                 case "MENSUAL":
                     this.amortizacionProvincial = 1;
                     break;
@@ -131,7 +164,7 @@ public class DeudasBean {
                     break;
                 default:
                     break;
-            }
+            }*/
         }
 
     }

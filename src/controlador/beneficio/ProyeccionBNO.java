@@ -111,7 +111,7 @@ public class ProyeccionBNO {
          */
         System.out.println("Indice value"+indice);
         int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue()+1;
-        ArrayList<String> Conceptos = new ArrayList<>();
+        ArrayList<String> Conceptos = new ArrayList();
 
         Conceptos.add("%Costo");
         Conceptos.add("%Gasto");
@@ -179,7 +179,7 @@ public class ProyeccionBNO {
          * Se anualiza el plazo
          */
         int NroAniosProy = (_accesoSolicitud.getPlazoMeses().divide(new BigDecimal("12"))).intValue();
-        ArrayList<String> Conceptos = new ArrayList<>();
+        ArrayList<String> Conceptos = new ArrayList();
 
         Conceptos.add("%Costo");
         Conceptos.add("%Gasto");
@@ -232,20 +232,28 @@ public class ProyeccionBNO {
         }
         return _retorno;
     }
-
+    /*
+    * Para el escenario moderado promediamos los históricos o los cierres, por ende los cortes los ignoramos 
+    */
     public double BNOproyModerado(ArrayList<BeneficiosBean> _matrixBeneficio, boolean _indicCorte) {
         //Para los valores porcentauales se utilizan  como tipo de dato DOUBLE
         String ValorFinalCalculado = "0";
         double _BNOproy = 1;
         double _Sumatoria = 0;
-
+        int historicos = 0;
         if (_indicCorte == true) {// Indica que el vaciado tiene cortes
-            for (int i = 0; i < _matrixBeneficio.size(); i++) {
+            historicos = _matrixBeneficio.size() - 1; //Menos el corte que es el último valor en la matriz
+            for (int i = 0; i < historicos; i++) {                
               _Sumatoria = _Sumatoria + _matrixBeneficio.get(i).getBnoVentas().doubleValue();
             }
-            _BNOproy = _Sumatoria / _matrixBeneficio.size();
+            _BNOproy = _Sumatoria / (_matrixBeneficio.size()-1);
             //_BNOproy = (_Sumatoria.divide(new BigDecimal(_matrixBeneficio.size()), 2, RoundingMode.HALF_UP)); // Calculo el promedio
-
+        }else {// Si son solo cortes
+             historicos = _matrixBeneficio.size();
+            for (int i = 0; i < historicos; i++) {                
+              _Sumatoria = _Sumatoria + _matrixBeneficio.get(i).getBnoVentas().doubleValue();
+            }
+            _BNOproy = _Sumatoria / (_matrixBeneficio.size()-1);
         }
         _BNOproy = round(_BNOproy, 2);
         
@@ -263,7 +271,6 @@ public class ProyeccionBNO {
         double porcGastoProy = 0;// = new BigDecimal(BigInteger.ONE);
         double _Sumatoria = 0;
         double _PromedioCierres = 0;
-
         
         //Obtenemos el valor del corte
         BNOCorte = _matrixBeneficio.get(_matrixBeneficio.size() - 1).getBnoVentas().doubleValue();
@@ -313,8 +320,7 @@ public class ProyeccionBNO {
     }
 
     public double CostosproyModerado(ArrayList<BeneficiosBean> _matrixBeneficio, boolean _indicCorte, double _BNOProy, double _BNOPermitido) {
-        int _Criterio = CompareDouble(_BNOProy, _BNOPermitido);
-        System.out.println("Criterio"+_Criterio);
+        int _Criterio = CompareDouble(_BNOProy, _BNOPermitido);     
         double TotalPorcentaje = 100; //new BigDecimal("100");
         double porcCostoCorte;// = new BigDecimal(BigInteger.ONE);
         double BNOCorte;//= new BigDecimal(BigInteger.ONE);
@@ -322,9 +328,7 @@ public class ProyeccionBNO {
         double Promedioponderado = 0;// = new BigDecimal(BigInteger.ONE);
         double porcCostoProy = 0;// = new BigDecimal(BigInteger.ONE);
         double _Sumatoria = 0;
-        double _PromedioCierres = 0;
-
-        
+        double _PromedioCierres = 0;        
         //Obtenemos el valor del corte
         BNOCorte = _matrixBeneficio.get(_matrixBeneficio.size() - 1).getBnoVentas().doubleValue();
         //1) Verificamos si el BNO Proyectado es igual al BNO permitido
@@ -369,7 +373,7 @@ public class ProyeccionBNO {
 
             }
         }
-        System.out.println("Hola"+porcCostoProy);
+        //System.out.println("Hola"+porcCostoProy);
         return (porcCostoProy);
     }
 
@@ -378,10 +382,10 @@ public class ProyeccionBNO {
         return new BigDecimal(String.valueOf(valor));
     }
 
-    public int CompareBigDecimal(BigDecimal a, BigDecimal b) {
+    public int CompareBigDecimal(BigDecimal BNOCalculado, BigDecimal BNOPErmitido) {
         //a = BNOCalculado
         //b = BNO Permitido 
-        int resultado = a.compareTo(b);
+        int resultado = BNOCalculado.compareTo(BNOPErmitido);
 
         if (resultado == 0)//son iguales
         {
@@ -418,7 +422,7 @@ public class ProyeccionBNO {
         return resultado;
     }
 
-    public ArrayList DevolverValoresCorte(ArrayList<BeneficiosBean> _matrixBeneficio) {
+ /*   public ArrayList DevolverValoresCorte(ArrayList<BeneficiosBean> _matrixBeneficio) {
         ArrayList<BigDecimal> ValoresCorte = new ArrayList<>();
 
         //for(int i = 0;i<_matrixBeneficio.size();i++){
@@ -428,7 +432,7 @@ public class ProyeccionBNO {
          //}
 
         return null;
-    }
+    }*/
   
    
     public static double round(double value, int places) {
